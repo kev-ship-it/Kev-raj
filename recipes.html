@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Vault</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cyber-header">
+        <h1>Recipe Vault</h1>
+        <p class="tagline">Cook Smart, Waste Less</p>
+        <label class="theme-toggle">
+            <input type="checkbox" onchange="toggleTheme()" id="theme-checkbox">
+            <span class="slider"></span>
+        </label>
+    </header>
+    <nav class="cyber-nav">
+        <a href="index.html">Dashboard</a>
+        <a href="donate.html">Donate Food</a>
+        <a href="track.html">Track Groceries</a>
+    </nav>
+    <div class="section cyber-section">
+        <div class="input-area">
+            <input id="ingredients" placeholder="Ingredients (e.g., rice, chicken)" type="text" onkeyup="suggestIngredients()">
+            <ul id="ingredient-suggestions" class="suggestions"></ul>
+            <select id="difficulty">
+                <option value="all">All Difficulties</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+            <button onclick="suggestRecipe()">Find Recipe</button>
+            <button onclick="randomRecipe()" class="random-btn">Random Pick</button>
+            <button onclick="generateRecipe()" class="generate-btn">Generate New</button>
+        </div>
+        <div class="recipe-display">
+            <p id="recipe-result"></p>
+            <label>Rate:</label>
+            <select id="rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <button onclick="saveFavorite()">Save Favorite</button>
+        </div>
+        <div class="favorites">
+            <h3>Favorites</h3>
+            <ul id="favorite-list" class="tile-grid"></ul>
+        </div>
+    </div>
+    <footer class="cyber-footer">
+        <img src="foot.jpg" alt="Food Image" class="footer-img">
+        <p>Powered by Team K-Square © 2025</p>
+    </footer>
+    <script src="recipes.js"></script>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        window.onload = function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-checkbox').checked = true;
+            }
+        };
+    </script>
+</body>
+</html>

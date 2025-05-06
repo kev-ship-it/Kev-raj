@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Waste Bites - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cyber-header">
+        <h1>Zero Waste Bites</h1>
+        <p class="tagline">The Future of Food Sustainability</p>
+        <label class="theme-toggle">
+            <input type="checkbox" onchange="toggleTheme()" id="theme-checkbox">
+            <span class="slider"></span>
+        </label>
+    </header>
+    <nav class="cyber-nav">
+        <a href="donate.html" class="nav-btn">
+            <img src="donate-icon.png" alt="Donate">
+            <span>Donate Food</span>
+        </a>
+        <a href="track.html" class="nav-btn">
+            <img src="track-icon.png" alt="Track">
+            <span>Track Groceries</span>
+        </a>
+        <a href="recipes.html" class="nav-btn">
+            <img src="recipe-icon.png" alt="Recipes">
+            <span>Recipe Vault</span>
+        </a>
+    </nav>
+    <main>
+        <section class="dashboard">
+            <h2>Your Impact Dashboard</h2>
+            <div class="stats-grid">
+                <div class="stat-card"><span id="food-saved">0</span><p>KG Saved</p></div>
+                <div class="stat-card"><span id="meals-donated">0</span><p>Meals Donated</p></div>
+                <div class="stat-card"><span id="points-earned">0</span><p>Points Earned</p></div>
+                <div class="stat-card"><span id="co2-reduced">0</span><p>KG CO2 Reduced</p></div>
+            </div>
+        </section>
+        <section class="news-feed">
+            <h2>Live Updates</h2>
+            <ul id="news-list">
+                <li>Global food waste down 2% this month!</li>
+                <li>New NGO joined in your area.</li>
+            </ul>
+        </section>
+        <section class="profile">
+            <h2>User Profile</h2>
+            <div class="profile-card">
+                <p>Name: Eco Warrior</p>
+                <p>Rank: Waste Slayer</p>
+                <p>Joined: March 31, 2025</p>
+            </div>
+        </section>
+        <section class="tips">
+            <h2>Cyber Tips</h2>
+            <ul>
+                <li>Freeze fruits before they overripen.</li>
+                <li>Use peels for compost or stock.</li>
+                <li>Scan items with voice: Try saying "Add milk"!</li>
+                <li>Donate weekly to earn bonus points.</li>
+                <li>Explore 500+ recipes in the Vault.</li>
+            </ul>
+        </section>
+    </main>
+    <footer class="cyber-footer">
+        <img src="foot.jpg" alt="Food Image" class="footer-img">
+        <p>Powered by Team K-Square © 2025</p>
+    </footer>
+    <script>
+        let stats = { food: 0, meals: 0, points: 0, co2: 0 };
+        setInterval(() => {
+            stats.food += 15; stats.meals += 8; stats.points += 20; stats.co2 += 5;
+            document.getElementById('food-saved').textContent = stats.food;
+            document.getElementById('meals-donated').textContent = stats.meals;
+            document.getElementById('points-earned').textContent = stats.points;
+            document.getElementById('co2-reduced').textContent = stats.co2;
+        }, 1500);
+
+        setInterval(() => {
+            var news = document.getElementById('news-list');
+            var li = document.createElement('li');
+            li.textContent = `User just saved ${Math.floor(Math.random() * 10)} kg of food!`;
+            news.insertBefore(li, news.firstChild);
+            if (news.children.length > 5) news.removeChild(news.lastChild);
+        }, 5000);
+
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+            document.getElementById('theme-checkbox').checked = document.body.classList.contains('light-theme');
+        }
+
+        window.onload = function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-checkbox').checked = true;
+            }
+        };
+    </script>
+</body>
+</html>

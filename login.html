@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Waste Bites Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="cyber-header">
+        <h1>Zero Waste Bites <span style="font-size: 0.6em;">by Team K-Square</span></h1>
+        <p class="tagline">Bite into a Waste-Free Future</p>
+        <label class="theme-toggle">
+            <input type="checkbox" onchange="toggleTheme()" id="theme-checkbox">
+            <span class="slider"></span>
+        </label>
+    </header>
+    <main>
+        <section class="cyber-section login-section">
+            <h2>Welcome Back</h2>
+            <form id="login-form" class="login-form">
+                <input type="text" id="username" placeholder="Username" required>
+                <input type="password" id="password" placeholder="Password" required>
+            </form>
+            <div class="social-login">
+                <button class="social-btn google-btn" onclick="simulateSocialLogin('Google')">
+                    <img src="google-icon.png" alt="Google"> Login with Google
+                </button>
+                <button class="social-btn apple-btn" onclick="simulateSocialLogin('Apple')">
+                    <img src="apple-icon.png" alt="Apple"> Login with Apple ID
+                </button>
+            </div>
+            <button type="submit" form="login-form" class="login-btn">Login</button>
+            <p id="login-message" class="login-message"></p>
+        </section>
+    </main>
+    <footer class="cyber-footer">
+        <img src="foot.jpg" alt="Food Image" class="footer-img">
+        <p>Powered by Team K-Square © 2025</p>
+    </footer>
+    <script src="login.js"></script>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+            document.getElementById('theme-checkbox').checked = document.body.classList.contains('light-theme');
+        }
+
+        window.onload = function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-checkbox').checked = true;
+            }
+        };
+    </script>
+</body>
+</html>

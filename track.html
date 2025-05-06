@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Waste Bites - Track Groceries</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.min.css">
+</head>
+<body>
+    <header class="cyber-header">
+        <h1>Zero Waste Bites <span style="font-size: 0.6em;">by Team K-Square</span></h1>
+        <p class="tagline">Scan to Track, Bite the Waste</p>
+        <label class="theme-toggle">
+            <input type="checkbox" onchange="toggleTheme()" id="theme-checkbox">
+            <span class="slider"></span>
+        </label>
+    </header>
+    <nav class="cyber-nav">
+        <a href="index.html">Dashboard</a>
+        <a href="donate.html">Donate Food</a>
+        <a href="recipes.html">Recipe Vault</a>
+    </nav>
+    <main>
+        <section class="cyber-section track-section">
+            <h2>Track Your Groceries</h2>
+            <div id="scanner-container">
+                <video id="scanner-video" autoplay playsinline></video>
+                <canvas id="scanner-canvas" style="display: none;"></canvas>
+            </div>
+            <button class="scan-btn" onclick="startScanner()">Scan with Webcam</button>
+            <input type="file" id="image-upload" accept="image/*" onchange="scanImage()" style="display: none;">
+            <label for="image-upload" class="upload-btn">Upload Image</label>
+            <div class="form">
+                <input id="item-name" placeholder="Item Name" type="text">
+                <input id="expiry-date" type="date">
+                <select id="category">
+                    <option value="dairy">Dairy</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="meat">Meat</option>
+                    <option value="grains">Grains</option>
+                    <option value="other">Other</option>
+                </select>
+                <button onclick="addGrocery()">Add Item</button>
+            </div>
+            <div class="controls">
+                <select id="category-filter" onchange="filterList()">
+                    <option value="all">All Categories</option>
+                    <option value="dairy">Dairy</option>
+                    <option value="vegetables">Vegetables</option>
+                    <option value="meat">Meat</option>
+                    <option value="grains">Grains</option>
+                    <option value="other">Other</option>
+                </select>
+                <button onclick="clearList()">Clear List</button>
+                <button onclick="exportList()">Export CSV</button>
+                <button onclick="bulkImport()">Bulk Import</button>
+            </div>
+            <canvas id="expiry-chart" width="400" height="200"></canvas>
+            <p id="countdown"></p>
+            <ul id="grocery-list" class="tile-grid"></ul>
+        </section>
+    </main>
+    <footer class="cyber-footer">
+        <img src="foot.jpg" alt="Food Image" class="footer-img">
+        <p>Powered by Team K-Square © 2025</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/quagga@0.12.1/dist/quagga.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="track.js"></script>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        window.onload = function() {
+            var savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+                document.getElementById('theme-checkbox').checked = true;
+            }
+        };
+    </script>
+</body>
+</html>
